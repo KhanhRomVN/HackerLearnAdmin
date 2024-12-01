@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* background */
+    --background-primary: #111315;
+    --background-secondary: #1a1d1f;
+    /* text */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    /* sidebar */
+    --sidebar-primary: #111315;
+    --sidebar-secondary: #1a1d1f;
+    --sidebar-item-selected: #272b2e;
+    /* sidebar item */
+    --sidebar-item-hover: #272b2e;
+    --sidebar-item-active: #33383c;
+    /* sidebar text */
+    --sidebar-text-hover: #e2e8f0;
+    --sidebar-text-active: #f8fafc;
+    /* dialog */
+    --dialog-background: #2F4962FF;
+    --dialog-header: #1a1d1f;
+    --dialog-body: #272b2e;
+    --dialog-footer: #33383c;
+    /* card */
+    --card-background: #111315;
+    --card-header: #1a1d1f;
+    --card-body: #272b2e;
+    --card-footer: #33383c;
+    /* button */
+    --button-primary: #111315;
+    --button-primary-hover: #1a1d1f;
+    --button-primary-active: #272b2e;
+    /* input */
+    --input-background: #111315;
+    --input-border: #1a1d1f;
+    --input-text: #f8fafc;
+    --input-placeholder: #94a3b8;
+  }
+  .dark { 
+    /* color */
+    --primary: #5445eb;
+    /* background */
+    --background-primary: #18191b;
+    --background-secondary: #232127;
+    /* text */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    /* sidebar */
+    --sidebar-primary: #111315;
+    --sidebar-secondary: #1a1d1f;
+    /* sidebar item */
+    --sidebar-item-hover: #272b2e;
+    --sidebar-item-active: #33383c;
+    /* sidebar text */
+    --sidebar-text-hover: #e2e8f0;
+    --sidebar-text-active: #f8fafc;
+    /* dialog */
+    --dialog-background: #111315;
+    --dialog-header: #1a1d1f;
+    --dialog-body: #272b2e;
+    --dialog-footer: #33383c;
+    /* card */
+    --card-background: #111315;
+    --card-header: #1a1d1f;
+    --card-body: #272b2e;
+    --card-footer: #33383c;
+    /* button */
+    --button-primary: #111315;
+    --button-primary-hover: #1a1d1f;
+    --button-primary-active: #272b2e;
+    /* input */
+    --input-background: #232127;
+    --input-border: #1a1d1f;
+    --input-text: #f8fafc;
+    --input-placeholder: #94a3b8;
+    /* search */
+    --search-background: #36343f;
+    --search-hover: #42404b;
+    --search-active: #4e4c57;
+    --search-placeholder: #94a3b8;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-none;
+  }
+  body {
+    @apply bg-background-primary text-text-primary;
+  }
+}
