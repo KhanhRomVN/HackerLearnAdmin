@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CourseSidebar } from "@/components/Sidebar/CourseSidebar";
 import { _GET_PUBLIC, _PUT } from "@/api";
 import { toast } from "react-hot-toast";
@@ -25,7 +24,6 @@ interface CourseDetail {
 }
 
 const CourseManagementPage = () => {
-  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState<CourseDetail | null>(null);
 
   const handleSelectCourse = async (courseId: string) => {

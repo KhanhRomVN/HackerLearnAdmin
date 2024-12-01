@@ -34,8 +34,8 @@ export default function CreateCoursePage() {
   });
 
   // Image states
-  const [selectedImage7x4, setSelectedImage7x4] = useState<File[]>([]);
-  const [selectedImage1x1, setSelectedImage1x1] = useState<File[]>([]);
+  const [, setSelectedImage7x4] = useState<File[]>([]);
+  const [, setSelectedImage1x1] = useState<File[]>([]);
   const [previewImage7x4, setPreviewImage7x4] = useState<string>("");
   const [previewImage1x1, setPreviewImage1x1] = useState<string>("");
 

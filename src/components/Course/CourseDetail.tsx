@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { CourseOverviewTab } from "./CourseOverviewTab";
 import { CourseDetailsTab } from "./CourseDetailsTab";
-import { CourseLessonTab } from "@/components/Course/CourseLessonTab";
+import { CourseChapterTab } from "@/components/Course/CourseChapterTab";
 import { CourseStudentTab } from "@/components/Course/CourseStudentTab";
 
 const fadeIn = {
@@ -194,7 +194,7 @@ export const CourseDetails = ({ selectedCourse, onUpdate }: CourseDetailsProps) 
                         className="gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary transition-all duration-300 hover:bg-primary/5"
                       >
                         <Book className="h-4 w-4" />
-                        <span className="font-medium">Lessons</span>
+                        <span className="font-medium">Chapters</span>
                       </TabsTrigger>
                       
                       <TabsTrigger 
@@ -223,7 +223,7 @@ export const CourseDetails = ({ selectedCourse, onUpdate }: CourseDetailsProps) 
                     </TabsContent>
 
                     <TabsContent value="lessons" className="space-y-6"> 
-                      <CourseLessonTab />
+                      <CourseChapterTab />
                     </TabsContent>
   
                     <TabsContent value="students" className="space-y-6">

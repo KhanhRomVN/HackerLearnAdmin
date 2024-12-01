@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { _GET_PUBLIC, _PUT_PUBLIC } from "@/api";
 import { motion } from "framer-motion";

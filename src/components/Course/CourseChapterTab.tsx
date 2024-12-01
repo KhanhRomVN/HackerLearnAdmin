@@ -1,6 +1,6 @@
 import { Book } from "lucide-react";
 
-export const CourseLessonTab = () => {
+export const CourseChapterTab = () => {
   return (
     <div className="text-center py-12">
       <Book className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
