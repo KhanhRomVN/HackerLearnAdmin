@@ -9,6 +9,8 @@ import FAQPage from "@/pages/FAQPage";
 import LoginPage from "@/pages/LoginPage";
 import MajorPage from "@/pages/MajorPage";
 import CreateCoursePage from "@/pages/CreateCoursePage";
+import LessonPage from "@/pages/LessonPage";
+
 const publicRoutes = [
     {
         path: "/",
@@ -58,6 +60,11 @@ const publicRoutes = [
     {
         path: "/create-course",
         element: <CreateCoursePage />,
+        layout: MainLayout,
+    },
+    {
+        path: "/lesson/:lessonId",
+        element: <LessonPage />,
         layout: MainLayout,
     },
 ];

@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Upload, Image } from "lucide-react";
-import { useState } from "react";
+import { useState } from "react"; 
 
 interface CourseDetail {
   overview: string;
@@ -155,7 +155,7 @@ export const CourseOverviewTab = ({ selectedCourse, isEditing, onFieldChange }: 
             </div>
           ) : (
             <div className=" rounded-lg overflow-auto w-[24rem] h-[calc(100vh-24rem)]">
-              <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap break-words">
+              <p className=" whitespace-pre-wrap break-words">
                 {selectedCourse.overview}
               </p>
             </div>

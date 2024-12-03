@@ -92,4 +92,8 @@
   body {
     @apply bg-background-primary text-text-primary;
   }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 1px;
+  }
 }

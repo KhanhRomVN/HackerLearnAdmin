@@ -223,7 +223,7 @@ export const CourseDetails = ({ selectedCourse, onUpdate }: CourseDetailsProps) 
                     </TabsContent>
 
                     <TabsContent value="lessons" className="space-y-6"> 
-                      <CourseChapterTab />
+                      <CourseChapterTab courseId={selectedCourse.id}/>
                     </TabsContent>
   
                     <TabsContent value="students" className="space-y-6">
