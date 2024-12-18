@@ -1,5 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
+export const VITE_LOAD_BALANCER_API = import.meta.env.VITE_LOAD_BALANCER_API;
+export const VITE_API_GOLANG_CHECK_LIST = import.meta.env.VITE_API_GOLANG_CHECK_LIST;
+
 interface RequestOptions {
   bodyData: RequestData;
   includeAccessToken?: boolean;
@@ -22,7 +25,7 @@ export class LoadBalancerService {
   private storage: Storage = localStorage;
   private cachedAccessToken: string | null = null;
   private tokenExpiryTime: Date | null = null;
-  private readonly loadBalancerAPI: string = 'http://localhost:9090/loadbalancer';
+  private readonly loadBalancerAPI: string = import.meta.env.VITE_LOAD_BALANCER_API;
   
   private async getAccessToken(): Promise<string | null> {
     try {
@@ -51,8 +54,6 @@ export class LoadBalancerService {
   private async request<T>(options: RequestOptions): Promise<ApiResponse<T>> {
     try {
       const { bodyData, includeAccessToken = true } = options;
-
-      console.log('bodyData', bodyData);
 
       if (!bodyData.endpoint) {
         throw new Error('Endpoint is required');
@@ -86,10 +87,6 @@ export class LoadBalancerService {
           }
         }
       );
-
-      console.log('Response:', response);
-      console.log('Response headers:', response.headers);
-      console.log('Response data:', response.data);
 
       return {
         data: response.data,

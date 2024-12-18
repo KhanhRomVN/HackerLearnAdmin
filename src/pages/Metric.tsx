@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw, Activity, Server } from "lucide-react"; // Thêm icons
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"; // Thêm animation
+import { VITE_API_GOLANG_CHECK_LIST } from '@/api';
 import {
   Select,
   SelectContent,
@@ -20,20 +21,17 @@ export default function Metric() {
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  const apiCheckList = [
-    {
-      type: "golang",
-      api: "http://localhost:8080/v1/metrics",
-      name: "Golang API",
-      status: "active"
-    },
-    // Thêm nhiều API endpoints hơn nếu cần
-  ]
+  const apiCheckList = VITE_API_GOLANG_CHECK_LIST?.split(',').map((apiUrl: string) => ({
+    type: "golang",
+    api: apiUrl,
+    name: "Golang API",
+    status: "active"
+  })) || [];
 
-  const apiEndpoints = ["all", ...apiCheckList.map(item => item.api)];
+  const apiEndpoints = ["all", ...apiCheckList.map((item: any) => item.api)];
   const filteredApiList = selectedApi === "all" 
     ? apiCheckList 
-    : apiCheckList.filter(item => item.api === selectedApi);
+    : apiCheckList.filter((item: any) => item.api === selectedApi);
 
   // Auto refresh mỗi 30 giây
   useEffect(() => {
@@ -145,7 +143,7 @@ export default function Metric() {
           <div className="container mx-auto">
             <div className="space-y-6">
         <AnimatePresence>
-          {filteredApiList.map((item, index) => 
+          {filteredApiList.map((item: any, index: number) => 
             renderMetric(item.type, item.api, item.name, item.status, index)
           )}
         </AnimatePresence>

@@ -5,7 +5,7 @@ import { ResponsivePie } from '@nivo/pie';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Activity } from "lucide-react";
 import axios from 'axios';
-
+import { VITE_LOAD_BALANCER_API } from '@/api';
 // Custom SimpleGauge Component
 function SimpleGauge({ value, max }: { value: number; max: number }) {
   const percentage = (value / max) * 100;
@@ -53,7 +53,7 @@ export function GolangMetric({ api }: { api: string }) {
 
   const fetchMetrics = async () => {
     try {
-      const response = await axios.get(`http://localhost:9090/api-check?api=${api}`);
+      const response = await axios.get(`${VITE_LOAD_BALANCER_API}/api-check?api=${api}`);
       
       if (response.data && typeof response.data === 'string') {
         const parsedMetrics = parsePrometheusMetrics(response.data);
