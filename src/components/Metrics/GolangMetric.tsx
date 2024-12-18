@@ -53,6 +53,7 @@ export function GolangMetric({ api }: { api: string }) {
 
   const fetchMetrics = async () => {
     try {
+      console.log(`${VITE_LOAD_BALANCER_API}/api-check?api=${api}`);
       const response = await axios.get(`${VITE_LOAD_BALANCER_API}/api-check?api=${api}`);
       
       if (response.data && typeof response.data === 'string') {

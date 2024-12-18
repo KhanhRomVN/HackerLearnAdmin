@@ -25,7 +25,7 @@ export class LoadBalancerService {
   private storage: Storage = localStorage;
   private cachedAccessToken: string | null = null;
   private tokenExpiryTime: Date | null = null;
-  private readonly loadBalancerAPI: string = import.meta.env.VITE_LOAD_BALANCER_API;
+  private readonly loadBalancerAPI: string = import.meta.env.VITE_LOAD_BALANCER_API + '/loadbalancer';
   
   private async getAccessToken(): Promise<string | null> {
     try {
