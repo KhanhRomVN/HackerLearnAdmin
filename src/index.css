@@ -4,84 +4,60 @@
 
 @layer base {
   :root {
+    /* color */
+    --primary: #3686ff;
     /* background */
-    --background-primary: #111315;
-    --background-secondary: #1a1d1f;
+    --background-primary: #fefeff;
+    --background-secondary: #f4f5f5;
     /* text */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-primary: #313131;
+    --text-secondary: #5d5d5c;
     /* sidebar */
-    --sidebar-primary: #111315;
-    --sidebar-secondary: #1a1d1f;
-    --sidebar-item-selected: #272b2e;
-    /* sidebar item */
-    --sidebar-item-hover: #272b2e;
-    --sidebar-item-active: #33383c;
-    /* sidebar text */
-    --sidebar-text-hover: #e2e8f0;
-    --sidebar-text-active: #f8fafc;
-    /* dialog */
-    --dialog-background: #2F4962FF;
-    --dialog-header: #1a1d1f;
-    --dialog-body: #272b2e;
-    --dialog-footer: #33383c;
+    --sidebar-hover: #428cfc;
+    --sidebar-select: #3686ff;
     /* card */
     --card-background: #111315;
-    --card-header: #1a1d1f;
+    --card-header: #1a1d1f; 
     --card-body: #272b2e;
     --card-footer: #33383c;
     /* button */
-    --button-primary: #111315;
-    --button-primary-hover: #1a1d1f;
-    --button-primary-active: #272b2e;
+    --button-background: #111315;
+    --button-hover: #1a1d1f;
+    --button-active: #272b2e;
     /* input */
     --input-background: #111315;
     --input-border: #1a1d1f;
     --input-text: #f8fafc;
     --input-placeholder: #94a3b8;
+    /* flashcard */
+    --flashcard-background: #757575;
   }
   .dark { 
     /* color */
-    --primary: #5445eb;
+    --primary: #3686ff;
     /* background */
-    --background-primary: #18191b;
-    --background-secondary: #232127;
+    --background-primary: #191e29;
+    --background-secondary: #111820;
     /* text */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-primary: #313131;
+    --text-secondary: #5d5d5c;
     /* sidebar */
-    --sidebar-primary: #111315;
-    --sidebar-secondary: #1a1d1f;
-    /* sidebar item */
-    --sidebar-item-hover: #272b2e;
-    --sidebar-item-active: #33383c;
-    /* sidebar text */
-    --sidebar-text-hover: #e2e8f0;
-    --sidebar-text-active: #f8fafc;
-    /* dialog */
-    --dialog-background: #111315;
-    --dialog-header: #1a1d1f;
-    --dialog-body: #272b2e;
-    --dialog-footer: #33383c;
+    --sidebar-hover: #428cfc;
+    --sidebar-select: #3686ff;
     /* card */
     --card-background: #111315;
-    --card-header: #1a1d1f;
+    --card-header: #1a1d1f; 
     --card-body: #272b2e;
     --card-footer: #33383c;
     /* button */
-    --button-primary: #111315;
-    --button-primary-hover: #1a1d1f;
-    --button-primary-active: #272b2e;
+    --button-background: #111315;
+    --button-hover: #1a1d1f;
+    --button-active: #272b2e;
     /* input */
-    --input-background: #232127;
+    --input-background: #111315;
     --input-border: #1a1d1f;
     --input-text: #f8fafc;
     --input-placeholder: #94a3b8;
-    /* search */
-    --search-background: #36343f;
-    --search-hover: #42404b;
-    --search-active: #4e4c57;
-    --search-placeholder: #94a3b8;
   }
 }
 
@@ -95,5 +71,56 @@
 
   .custom-scrollbar::-webkit-scrollbar {
     width: 1px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  
+  .scrollbar-thumb-gray-400::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+    border-radius: 6px;
+  }
+  
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  .scrollbar-thumb-gray-500:hover::-webkit-scrollbar-thumb {
+    background-color: #6b7280;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
   }
 }

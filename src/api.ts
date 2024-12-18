@@ -1,67 +1,200 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
-const getAccessToken = () => localStorage.getItem('access_token');
+interface RequestOptions {
+  bodyData: RequestData;
+  includeAccessToken?: boolean;
+}
 
-// Tạo instance axios với config mặc định
-const axiosInstance = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+interface RequestData {
+  endpoint: string;
+  method: string;
+  reqBody?: Record<string, any>;
+  accessToken?: string;
+}
 
-// Thêm interceptor để tự động gắn token vào header
-axiosInstance.interceptors.request.use((config) => {
-  const token = getAccessToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+interface ApiResponse<T = any> {
+  data: T | null;
+  error?: string;
+  status: number;
+}
+
+export class LoadBalancerService {
+  private storage: Storage = localStorage;
+  private cachedAccessToken: string | null = null;
+  private tokenExpiryTime: Date | null = null;
+  private readonly loadBalancerAPI: string = 'http://localhost:9090/loadbalancer';
+  
+  private async getAccessToken(): Promise<string | null> {
+    try {
+      if (
+        this.cachedAccessToken &&
+        this.tokenExpiryTime &&
+        new Date() < this.tokenExpiryTime
+      ) {
+        return this.cachedAccessToken;
+      }
+
+      const token = this.storage.getItem('access_token');
+      if (token) {
+        this.cachedAccessToken = token;
+        this.tokenExpiryTime = new Date(new Date().getTime() + 5 * 60000);
+        return token;
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('Error getting access token:', error);
+      return null;
+    }
   }
-  return config;
-});
 
-const _GET = async (api: string) => {
-  const response = await axiosInstance.get(api);
-  return response.data;
-};
+  private async request<T>(options: RequestOptions): Promise<ApiResponse<T>> {
+    try {
+      const { bodyData, includeAccessToken = true } = options;
 
-const _POST = async (api: string, body: any) => {
-  const response = await axiosInstance.post(api, body);
-  return response.data;
-};
+      console.log('bodyData', bodyData);
 
-const _PUT = async (api: string, body: any) => {
-  const response = await axiosInstance.put(api, body);
-  return response.data;
-};
+      if (!bodyData.endpoint) {
+        throw new Error('Endpoint is required');
+      }
 
-const _DELETE = async (api: string) => {
-  const response = await axiosInstance.delete(api);
-  return response.data;
-};
+      let accessToken: string | null = null;
+      if (includeAccessToken) {
+        accessToken = await this.getAccessToken();
+        if (!accessToken) {
+          throw new Error('Access token required but not available');
+        }
+        bodyData.accessToken = accessToken;
+      }
 
-const publicAxiosInstance = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+      const headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+      };
 
-const _GET_PUBLIC = async (api: string) => {
-  const response = await publicAxiosInstance.get(api);
-  return response.data;
-};
+      console.debug('Request Data:', bodyData);
 
-const _POST_PUBLIC = async (api: string, body: any) => {
-  const response = await publicAxiosInstance.post(api, body);
-  return response.data;
-};
+      const response: AxiosResponse = await axios.post(
+        this.loadBalancerAPI,
+        bodyData,
+        { 
+          headers,
+          timeout: 30000,
+          maxContentLength: Infinity,
+          maxBodyLength: Infinity,
+          validateStatus: function (status) {
+            return status >= 200 && status < 300;
+          }
+        }
+      );
 
-const _PUT_PUBLIC = async (api: string, body: any) => {
-  const response = await publicAxiosInstance.put(api, body);
-  return response.data;
-};
+      console.log('Response:', response);
+      console.log('Response headers:', response.headers);
+      console.log('Response data:', response.data);
 
-const _DELETE_PUBLIC = async (api: string) => {
-  const response = await publicAxiosInstance.delete(api);
-  return response.data;
-};
+      return {
+        data: response.data,
+        status: response.status
+      };
 
-export { _GET, _POST, _PUT, _DELETE, _GET_PUBLIC, _POST_PUBLIC, _PUT_PUBLIC, _DELETE_PUBLIC };
+    } catch (error: any) {
+      console.error('Request error:', error);
+      return {
+        data: null,
+        error: error.message || 'Unknown error occurred',
+        status: error.response?.status || 500
+      };
+    }
+  }
+
+  // Public API Methods
+  async getPublic<T>(params: { endpoint: string; reqBody?: Record<string, any> }): Promise<ApiResponse<T>> {
+    console.log('getPublic', params);
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'GETPUBLIC',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: false
+    });
+  }
+
+  async postPublic<T>(params: { endpoint: string; reqBody: Record<string, any> }): Promise<ApiResponse<T>> {
+    console.log('reqBody', params.reqBody);
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'POSTPUBLIC',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: false
+    });
+  }
+
+  async putPublic<T>(params: { endpoint: string; reqBody: Record<string, any> }): Promise<ApiResponse<T>> {
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'PUTPUBLIC',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: false
+    });
+  }
+
+  async deletePublic<T>(params: { endpoint: string; reqBody?: Record<string, any> }): Promise<ApiResponse<T>> {
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'DELETEPUBLIC',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: false
+    });
+  }
+
+  // Private API Methods
+  async get<T>(params: { endpoint: string; reqBody?: Record<string, any> }): Promise<ApiResponse<T>> {
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'GET',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: true
+    });
+  }
+
+  async post<T>(params: { endpoint: string; reqBody: Record<string, any> }): Promise<ApiResponse<T>> {
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'POST',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: true
+    });
+  }
+
+  async put<T>(params: { endpoint: string; reqBody: Record<string, any> }): Promise<ApiResponse<T>> {
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'PUT',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: true
+    });
+  }
+
+  async delete<T>(params: { endpoint: string; reqBody?: Record<string, any> }): Promise<ApiResponse<T>> {
+    return this.request<T>({
+      bodyData: {
+        endpoint: params.endpoint,
+        method: 'DELETE',
+        reqBody: params.reqBody
+      },
+      includeAccessToken: true
+    });
+  }
+}

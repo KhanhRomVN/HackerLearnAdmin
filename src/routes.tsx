@@ -1,72 +1,41 @@
 import MainLayout from "@/layout/MainLayout";
-import DashboardPage from "@/pages/DashboardPage";
-import MajorManagementPage from "@/pages/MajorManagementPage";
-import SkillManagementPage from "@/pages/SkillManagementPage";
-import CourseManagementPage from "@/pages/CourseManagementPage";
-import MemberManagementPage from "@/pages/MemberManagementPage";
-import SettingPage from "@/pages/SettingPage";
-import FAQPage from "@/pages/FAQPage";
-import LoginPage from "@/pages/LoginPage";
-import MajorPage from "@/pages/MajorPage";
-import CreateCoursePage from "@/pages/CreateCoursePage";
-import LessonPage from "@/pages/LessonPage";
-
+import CoursePage from "@/pages/Course";
+import ChapterPage from "@/pages/Chapter";
+import MetricPage from "@/pages/Metric";
+import SettingPage from "@/pages/Setting";
+import LessonPage from "@/pages/Lesson";
+import FlashcardPage from "@/pages/Flashcard";
 const publicRoutes = [
     {
         path: "/",
-        element: <DashboardPage />,
+        element: <MetricPage />,
         layout: MainLayout,
     },
     {
-        path: "/major",
-        element: <MajorManagementPage />,
+        path: "/courses",
+        element: <CoursePage />,
         layout: MainLayout,
     },
     {
-        path: "/skill",
-        element: <SkillManagementPage />,
+        path: "/chapter/:id",
+        element: <ChapterPage />,
         layout: MainLayout,
     },
     {
-        path: "/course",
-        element: <CourseManagementPage />,
+        path: "/lesson/:id",
+        element: <LessonPage />,
         layout: MainLayout,
     },
     {
-        path: "/member",
-        element: <MemberManagementPage />,
-        layout: MainLayout,
-    },
-    {
-        path: "/setting",
+        path: "/settings",
         element: <SettingPage />,
         layout: MainLayout,
     },
     {
-        path: "/faq",
-        element: <FAQPage />,
+        path: "/flashcard/:id",
+        element: <FlashcardPage />,
         layout: MainLayout,
-    },
-    {
-        path: "/login",
-        element: <LoginPage />,
-        layout: MainLayout,
-    },
-    {
-        path: "/major/:majorId",
-        element: <MajorPage />,
-        layout: MainLayout,
-    },
-    {
-        path: "/create-course",
-        element: <CreateCoursePage />,
-        layout: MainLayout,
-    },
-    {
-        path: "/lesson/:lessonId",
-        element: <LessonPage />,
-        layout: MainLayout,
-    },
+    }
 ];
 
 export { publicRoutes };

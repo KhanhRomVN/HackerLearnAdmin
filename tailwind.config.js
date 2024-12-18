@@ -31,49 +31,35 @@ module.exports = {
         text: {
           primary: "var(--text-primary)",
           secondary: "var(--text-secondary)",
-        },
+        },  
         /* sidebar */
         sidebar: {
-          primary: "var(--sidebar-primary)",
-          secondary: "var(--sidebar-secondary)",
-          selected: "var(--sidebar-item-selected)",
-        },
-        /* sidebar item */
-        "sidebar-item": {
-          hover: "var(--sidebar-item-hover)",
-          active: "var(--sidebar-item-active)",
-        },
-        /* sidebar text */
-        "sidebar-text": {
-          hover: "var(--sidebar-text-hover)", 
-          active: "var(--sidebar-text-active)",
-        },
-        /* dialog */
-        dialog: {
-          background: "var(--dialog-background)",
-          header: "var(--dialog-header)",
+          hover: "var(--sidebar-hover)",
+          select: "var(--sidebar-select)",
         },
         /* card */
         card: {
           background: "var(--card-background)",
           header: "var(--card-header)",
+          body: "var(--card-body)",
+          footer: "var(--card-footer)",
         },
         /* button */
         button: {
-          primary: "var(--button-primary)",
-          primaryHover: "var(--button-primary-hover)",
-          primaryActive: "var(--button-primary-active)",
+          background: "var(--button-primary)",
+          hover: "var(--button-primary-hover)",
+          active: "var(--button-primary-active)",
         },
         /* input */
         input: {
           background: "var(--input-background)",
+          border: "var(--input-border)",
+          text: "var(--input-text)",
+          placeholder: "var(--input-placeholder)",
         },
-        /* search */
-        search: {
-          background: "var(--search-background)",
-          hover: "var(--search-hover)",
-          active: "var(--search-active)",
-          placeholder: "var(--search-placeholder)",
+        /* flashcard */
+        flashcard: {
+          background: "var(--flashcard-background)",
         },
       },
     },
