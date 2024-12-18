@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, Volume2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MediaPlayerProps {

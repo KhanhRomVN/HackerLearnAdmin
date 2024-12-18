@@ -1,5 +1,3 @@
-// src/components/Metrics/GolangMetric.tsx
-
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveLine } from '@nivo/line';
@@ -111,6 +109,8 @@ export function GolangMetric({ api }: { api: string }) {
     
     let currentMetric = '';
     let currentType = '';
+
+    console.log(currentMetric);
     
     for (const line of lines) {
       if (line.startsWith('# HELP')) {

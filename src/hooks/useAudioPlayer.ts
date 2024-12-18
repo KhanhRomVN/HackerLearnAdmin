@@ -42,7 +42,7 @@ export const useAudioPlayer = ({
         setCurrentTime(0);
         onEnd?.();
       },
-      onloaderror: (id, error) => {
+      onloaderror: (_id, error) => {
         setIsLoading(false);
         onError?.(error);
       },

@@ -1,6 +1,5 @@
-// components/Course/ImageUploadTooltip.tsx
 import { useState, useCallback } from 'react';
-import { handleImageSelect, handleUploadImage } from '@/utils/uploadImageFirebaseUtil';
+import { handleUploadImage } from '@/utils/uploadImageFirebaseUtil';
 import { LoadBalancerService } from '@/api';
 import { toast } from 'react-hot-toast';
 import { useDropzone } from 'react-dropzone';
@@ -13,7 +12,6 @@ interface ImageUploadTooltipProps {
 
 export function ImageUploadTooltip({ 
   courseId, 
-  currentImageUrl, 
   onUpdate 
 }: ImageUploadTooltipProps) {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
