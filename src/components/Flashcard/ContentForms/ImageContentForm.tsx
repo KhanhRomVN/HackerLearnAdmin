@@ -5,12 +5,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { 
   Plus, 
-  Minus, 
   Upload, 
   Image as ImageIcon, 
   X, 
   Loader2, 
-  Link as LinkIcon,
   AlertCircle
 } from 'lucide-react';
 import { LoadBalancerService } from '@/api';

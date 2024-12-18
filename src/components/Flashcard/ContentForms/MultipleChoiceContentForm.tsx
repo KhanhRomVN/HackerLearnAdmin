@@ -5,11 +5,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
-import { Plus, Minus, Save, Trash2, HelpCircle } from 'lucide-react';
+import { Plus, Minus, Save, HelpCircle } from 'lucide-react';
 import { LoadBalancerService } from '@/api';
 import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 interface MultipleChoiceContentFormProps {
   flashcardSequenceId: string;

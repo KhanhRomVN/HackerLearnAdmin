@@ -23,7 +23,7 @@ interface MultipleChoiceContentViewProps {
 export function MultipleChoiceContentView({ content }: MultipleChoiceContentViewProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [isChecked, setIsChecked] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [, setIsAnimating] = useState(false);
 
   const handleCheck = () => {
     setIsAnimating(true);

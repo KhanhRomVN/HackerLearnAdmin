@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "react-hot-toast";
-import { Plus, Upload, Image as ImageIcon } from "lucide-react";
+import { Plus, Image as ImageIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Command, CommandInput, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
 import { useDropzone } from 'react-dropzone';
@@ -42,7 +42,7 @@ export function AddCourseTooltip() {
   const [searchResults, setSearchResults] = useState<Course[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [open, setOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [, setSelectedImage] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
